@@ -1,0 +1,46 @@
+---
+# path to public ssh key to import into account (optional)
+#ssh_pub_key_path: "~/.ssh/id_rsa.pub"
+
+# Reboot if required after hardware fixes (recommended)
+reboot_after_fixes: True
+
+# Enable passwordless sudo for the specified user
+#   only set if you intend to use ansible with this host in the future
+set_pwless_sudo: False
+
+# Set if you want to secure SSH by disabling password authentication
+#   To minimize lock-out possibilities, this only has an effect if:
+#     'ssh_pub_key_path' (above) is a path to a valid public-key
+#     the playbook succesfully imports (or finds) the key on the target host
+ssh_disable_pw_logon: False
+
+# apt packages to install
+install_packages:
+  - python-pip
+  - curl
+  - git
+  - jq
+
+# apt packages to remove
+# remove_packages:
+#   -
+
+# upgrade --user python packages
+python_upgrade_user:
+  - pip
+  - setuptools
+
+# install --user python packages
+python_install:
+  - cryptography
+
+# install system python packages (use cautiously)
+# python_install_sys:
+#   - requests
+#   - wheel
+
+# upgrade system python packages (use cautiously)
+# python_upgrade_sys:
+#   - pip
+#   - setuptools
