@@ -1,0 +1,34 @@
+#!/usr/bin/env ansible-playbook -i inventory
+---
+- name: Verify Compatability
+  hosts: newhost
+
+  tasks:
+  - name: Verify distro
+    fail: msg="This playbook is for Ubuntu or Debian based distros"
+    when: ansible_os_family != "Debian"
+    tags: always
+
+- name: Request password then Configure Host
+  hosts: newhost
+
+  vars_prompt:
+  - name: "ansible_password"
+    prompt: "Enter password for User on New Host"
+    private: yes
+
+  vars_files:
+    - config.yml
+
+  pre_tasks:
+    - set_fact:
+        ansible_user: "{{ ansible_user_id }}"
+      when: ansible_user is undefined
+      tags: always
+
+    - set_fact:
+        ansible_sudo_pass: "{{ ansible_password }}"
+      tags: always
+
+  roles:
+    - hardware
