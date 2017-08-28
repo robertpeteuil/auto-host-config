@@ -89,3 +89,9 @@ open the `config.yml` file with your editor.
   - `./main-sudo.yml`
 - Run a playbook that applies only the mac related hardware fixes (you will be prompted for a password):
   - `./mac-fixes-only.yml`
+
+### Acknowledgments
+
+This playboook includes the [mounopts module](https://github.com/Uberspace/ansible-mountopts) written by Uberspace in the library directory.  It was included directly as there was no easy way to define a single file as a submodule.
+
+Note: it's only used when the target computer is a notebook and the primary drive is an SSD.
