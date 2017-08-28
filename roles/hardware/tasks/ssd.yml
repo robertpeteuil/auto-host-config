@@ -1,0 +1,33 @@
+---
+# Run if a notebook and the primary drive is an SSD
+#   Uses the 3rd party "mountopts" module to add "noatime" to the mount option
+#     this stop writes to the drive to update each file access time, as excessive
+#     writes to SSD drives can decrease life
+
+# make sure pip is installed for next task
+- name: SSD | install pip
+  apt:
+    name: python-pip
+    update_cache: yes
+    cache_valid_time: 300
+    state: present
+
+# "mountopts" module requires fstab library
+- name: SSD | install fstab for mountopts-module
+  pip:
+    name: fstab
+
+# use mountopts to change the mount options for '/' and '/home'
+- name: SSD | set 'noatime' for '/'
+  mountopts:
+    name: /
+    option: noatime
+    state: present
+  notify: restart host
+
+- name: SSD | set 'noatime' for '/home'
+  mountopts:
+    name: /home
+    option: noatime
+    state: present
+  notify: restart host

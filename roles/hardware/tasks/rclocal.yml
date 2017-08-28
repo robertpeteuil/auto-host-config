@@ -1,0 +1,19 @@
+---
+- name: rc.local | check exists
+  stat:
+    path: "/etc/rc.local"
+  register: rclocal_check
+
+- name: rc.local | create if absent
+  file:
+    path: "/etc/rc.local"
+    owner: root
+    group: root
+    mode: 0755
+  when: not rclocal_check.stat.exists
+
+- name: rc.local | enable systemd service
+  systemd:
+    name: rc-local.service
+    enabled: yes
+    state: started

@@ -1,0 +1,60 @@
+---
+# this use of 'find' reqs Ansible 2.3+ in order to specify file_type=link (or 'any') 
+- name: Notebook Check
+  find:
+    paths: /sys/class/power_supply
+    file_type: any
+    patterns: "BAT*"
+  register: battery_info
+  tags: notebook
+
+- name: Set notebook variable
+  set_fact:
+    isnotebook: "{{ battery_info.matched|int > 0 }}"
+  tags: notebook
+
+- name: Set mac variable
+  set_fact:
+    ismac: "{{ 'mac' in ansible_product_name|lower }}"
+  tags:
+    - notebook
+    - mac
+
+- name: Set primary-drive SSD variable
+  set_fact:
+    isssd: "{{ 'ssd' in ansible_devices.sda.model|lower }}"
+  tags: notebook
+
+- name: rc.local required
+  include: rclocal.yml
+  when: ismac or isnotebook
+  become: True
+  tags:
+    - notebook
+    - keyboard
+    - power
+
+- name: mac found - fix keyboard map
+  include: mac-kybd.yml
+  when: ismac
+  become: True
+  tags:
+    - notebook
+    - keyboard
+    - mac
+
+- name: notebook - adjust power settings
+  include: power.yml
+  when: isnotebook
+  become: True
+  tags:
+    - notebook
+    - power
+
+- name: notebook ssd - config reduced wear
+  include: ssd.yml
+  when: isssd and isnotebook
+  become: True
+  tags:
+    - notebook
+    - ssd

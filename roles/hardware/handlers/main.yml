@@ -1,0 +1,9 @@
+---
+# reboot host when necessary
+- name: restart host
+  shell: sleep 2 && shutdown -r now "Ansible Triggered Reboot"
+  become: true
+  async: 1
+  poll: 0
+  ignore_errors: True
+  when: reboot_after_fixes|bool

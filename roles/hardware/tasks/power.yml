@@ -1,0 +1,22 @@
+---
+# turn off wifi power saving
+- name: Power | change wifi power setting
+  lineinfile:
+    path: /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+    line: "wifi.powersave = 2"
+    regexp: '^wifi\.powersave'
+    state: present
+
+# install and enable powertop utility
+- name: Power | install powertop
+  apt:
+    name: powertop
+    update_cache: yes
+    cache_valid_time: 300
+
+- name: Power | enable powertop power-tuning
+  lineinfile:
+    path: /etc/rc.local
+    line: "sudo powertop --auto-tune"
+    insertbefore: "^exit 0"
+    state: present

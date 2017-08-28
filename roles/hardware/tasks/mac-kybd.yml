@@ -1,0 +1,21 @@
+---
+# These tasks run if a Mac has been detected, even if its not a notebook
+
+- name: Mac Keyboard | check key-mapping value
+  shell: grep -Fxq "0" /sys/module/hid_apple/parameters/iso_layout
+  register: keybd_conf
+  ignore_errors: True
+  changed_when: False
+  failed_when: False
+
+- name: Mac Keyboard | fix key-mapping for current session
+  shell: "echo 0 | sudo tee /sys/module/hid_apple/parameters/iso_layout"
+  when: keybd_conf.rc != 0
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Mac Keyboard | fix key-mapping on boot
+  lineinfile:
+    path: /etc/rc.local
+    line: "echo 0 > /sys/module/hid_apple/parameters/iso_layout"
+    insertbefore: "^exit 0"
+    state: present
