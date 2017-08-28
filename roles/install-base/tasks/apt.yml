@@ -1,0 +1,39 @@
+---
+- name: Apt | install dependancies
+  apt:
+    name: aptitude
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+
+- name: Apt | upgrade existing packages
+  apt:
+    upgrade: safe
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Apt | install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ install_packages }}"
+  when: install_packages is defined
+
+- name: Apt | remove packages
+  apt:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+    autoremove: yes
+  with_items: "{{ remove_packages }}"
+  when: remove_packages is defined
+
+- name: Apt | clean caches
+  shell: "apt-get autoclean"
+  args:
+    warn: False
+  changed_when: False
+
+- name: Apt | clear logs
+  shell: "find /var/log -type f -exec /bin/cp /dev/null {} \\;"
+  changed_when: False

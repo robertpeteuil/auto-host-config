@@ -1,0 +1,46 @@
+---
+- name: Python | install pip
+  apt:
+    name: python-pip
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+  become: True
+
+# run as user so --user goes to user's dir
+- name: Python | install --user packages
+  pip:
+    name: "{{ item }}"
+    state: present
+    extra_args: --user
+  with_items: "{{ python_install_user }}"
+  become: False
+  when: python_install_user is defined
+
+# run as user so --user goes to user's dir
+- name: Python | upgrade --user packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+    extra_args: --user
+  with_items: "{{ python_upgrade_user }}"
+  become: False
+  when: python_upgrade_user is defined
+
+# run as sudo as installing system packages
+- name: Python | install system packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ python_install_sys }}"
+  become: True
+  when: python_install_sys is defined
+
+# run as sudo as upgrading system packages
+- name: Python | upgrade system packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ python_upgrade_sys }}"
+  become: True
+  when: python_upgrade_sys is defined

@@ -1,0 +1,23 @@
+---
+# apt packages to install
+install_packages:
+  - python-pip
+  - curl
+
+# apt packages to remove
+# remove_packages:
+#   -
+
+# upgrade python packages --user
+python_upgrade_user:
+  - pip
+  - setuptools
+
+# install python packages --user
+# python_install:
+#   - cryptography
+
+# upgrade python packages for system (use cautiously)
+# python_upgrade_sys:
+#   - pip
+#   - setuptools
