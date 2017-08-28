@@ -1,0 +1,38 @@
+#!/usr/bin/env ansible-playbook -i inventory
+---
+- name: Verify Compatability and Sudo Config
+  hosts: newhost
+
+  tasks:
+  - name: Verify distro
+    fail: msg="This playbook is for Ubuntu or Debian based distros"
+    when: ansible_os_family != "Debian"
+    tags: always
+
+  - name: Verify nopass
+    block:
+      - name: Test sudo privleges
+        shell: "ls /root"
+        become: True
+        changed_when: False
+    rescue:
+      - name: Abort This Playbook
+        fail: msg='This account requires a sudo password, run "main.yml" instead.'
+    tags: always
+
+- name: Configure Host
+  hosts: newhost
+
+  vars_files:
+    - config.yml
+
+  pre_tasks:
+    - set_fact:
+        ansible_user: "{{ ansible_user_id }}"
+      when: ansible_user is undefined
+      tags: always
+
+  roles:
+    - hardware
+    - install-base
+    - config-sys
