@@ -1,0 +1,8 @@
+---
+- name: Ansible | Enable passwordless sudo for future Ansible use
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "^{{ ansible_user }}"
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    insertafter: "EOF"

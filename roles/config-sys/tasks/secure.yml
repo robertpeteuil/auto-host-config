@@ -1,0 +1,39 @@
+---
+- name: Secure | disable ssh root login
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PermitRootLogin"
+    line: "PermitRootLogin no"
+    state: present
+  notify: restart ssh
+  tags: secure-ssh
+
+# To minimize lock-out scenarios, this only executes if:
+#   config.yml enables 'ssh_disable_pw_logon: True'
+#   A key is specified in 'ssh_pub_key_path' and imported or exists
+#   SSH PubkeyAuthentication was sucessfully enabled
+- name: Secure | disable ssh password auth
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  when: ssh_disable_pw_logon and ssh_auth
+  notify: restart ssh
+  tags: secure-ssh
+
+- name: Secure | prevent ip spoofing
+  lineinfile:
+    path: /etc/host.conf
+    line: "nospoof on"
+    insertbefore: "^exit 0"
+    state: present
+  tags: secure-ip
+
+- name: Secure | install fail2ban
+  apt:
+    name: fail2ban
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+  tags: fail2ban

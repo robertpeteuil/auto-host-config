@@ -1,0 +1,10 @@
+---
+# Enable passwordless sudo for the specified user
+#   only set if you intend to use ansible with this host in the future
+set_pwless_sudo: False
+
+# Set if you want to secure SSH by disabling password authentication
+#   To minimize lock-out possibilities, this only has an effect if:
+#     'ssh_pub_key_path' is set in the config file to a valid public-key
+#     the playbook succesfully imports (or finds) the key on the target host
+ssh_disable_pw_logon: False

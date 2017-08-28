@@ -1,0 +1,22 @@
+---
+- name: SSH config
+  include: ssh.yml
+  tags:
+    - config-sys
+    - ssh
+
+- name: Enhance host security
+  include: secure.yml
+  become: True
+  tags:
+    - config-sys
+    - secure
+
+- name: Enable passwordless sudo for future Ansible Use
+  include: ansible.yml
+  when: set_pwless_sudo|bool
+  become: True
+  tags:
+    - config-sys
+    - nopasswd
+    - ansible
