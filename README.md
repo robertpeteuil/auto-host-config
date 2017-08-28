@@ -92,6 +92,6 @@ open the `config.yml` file with your editor.
 
 ### Acknowledgments
 
-This playboook includes the [mounopts module](https://github.com/Uberspace/ansible-mountopts) written by Uberspace in the library directory.  It was included directly as there was no easy way to define a single file as a submodule.
+This playboook includes the [mounopts module](https://github.com/Uberspace/ansible-mountopts) written by Uberspace in the library directory.  
 
 Note: it's only used when the target computer is a notebook and the primary drive is an SSD.
