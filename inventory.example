@@ -1,10 +1,15 @@
-[newhost]
-hostname.local      ansible_user=username
-
 # the [hewhost] section header is required
+[newhost]
 
-# 'hostname.local' - replace with IP address or hostname of target host
+hostname
 
-# ansible_user=username - specify when remote username is different than
-#                         current user on the control machine
-#                         Change 'username' to the username on the target host
+# use this format if target host has a different username
+# hostname      ansible_user=username
+
+# INVENTORY PARAMETERS
+#
+#   hostname              - replace with IP address or hostname of target host
+#
+#   ansible_user=username - specify when remote username is different than
+#                           current user on control host
+#                           change 'username' to the username on the target host
