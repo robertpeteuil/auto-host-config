@@ -1,26 +1,26 @@
-# Ansible Linux Config Playbook
-### Enables rapidly applying hardware settings, security config and installing packages
+# Automating Linux Host Configuration
+### Rapidly apply hardware settings, configuration details, and install/remove packages
 [![lang](https://img.shields.io/badge/language-ansible-3572A5.svg?style=flat-square)](https://github.com/robertpeteuil/ansible-linux-config)
 [![status](https://img.shields.io/badge/status-stable-brightgreen.svg?style=flat-square)](https://github.com/robertpeteuil/ansible-linux-config)
 
 ---
 
-This playbook currently works with any Debian/Ubuntu based linux distro.  It was  created for configuring fresh-installs on notebooks, but it can also be used with servers and cloud hosts without change.  
+This automation process was created for configuring linux hosts, wether they're notebooks, servers or cloud hosts.  It currently runs on Debian/Ubuntu based hosts, but it can be adapted for use on Redhat/CEntOS by changing only a few files.
 
-There are three playbooks, but most users will only use one.  They have been configured to be executed directly, which eliminates the need to enter the `ansible-playbook` command and required parameters.
+It's implemented using Ansible, a free open-source provisioning and management tool.  Ansible is very simple to install and remove.  In fact you can even install it, run this playbook and then uninstall it.
 
 ### Requirements
 Since Ansible is an agent-less utility, the requirements are minimal:
 - A computer to serve as the "control computer" that has Ansible installed.
 - Target host(s) with an SSH Server installed and running.
-- An account on each target-host with SSH access and Sudo capabilities.
+- An account on each target-host with SSH access and sudo capabilities.
 
 ### Playbooks, Roles and Settings
 
 **Playbooks**
-- `main.yml` - the primary method of execution.  It prompts for the target host password and executes all three roles.
-- `main-sudo.yml` - this can be used by users who have the account on the target host configured for SSH certificate authentication and password-less sudo.  With these in place, they do not have to type in the password each time it is ran.
-- `mac-fixes-only.yml` - for users who have installed linux on a Mac and only want to apply the hardware adjustments.
+- `main.yml` - the primary method of execution.  It prompts for the target host password and executes all three roles (described below).
+- `main-sudo.yml` - this is only for users who have configured the host for Ansible use (by running main.yml with ssh_pub_key_path pointing to their SSH certificate, and set_pwless_sudo set to True).
+- `mac-fixes-only.yml` - for users who only want to apply the hardware adjustments for Linux on a notebook or Mac.
 
 **Roles**
 - `hardware`: current HW adjustments are for linux installs on notebooks and macs
@@ -61,40 +61,39 @@ Note: you can replace `host-setup` with a different folder-name, just be sure it
 
 
 **Rename example Inventory & Config files**
-
-Create inventory and configuration files without the ".example" suffix
-- These can be copied or renamed manually
-- or you can use the included scripts: `./rename-examples.sh`
+Create copies of the inventory and configuration files without the ".example" suffix
+- The included script does this for you: `./rename-examples.sh`
+- The files can also be copied or renamed manually
 
 **Adjust "inventory" file**
-open the `inventory` file with your editor
+Open the `inventory` file with your editor
 - replace `hostname.local` with the IP address or hostname of the target host
-- if the username on the target host is different than the username your main computer
-  - change `username` in the parameter `ansible_user=username` to match the username for the target host
+- if the username on the target host is different than your main computer
+  - add the parameter `ansible_user=username` after the target hostname / IP address
+  - change `username` to match the username for the target host
 
 **Adjust settings in "config.yml"**
 open the `config.yml` file with your editor.
-- review, edit, change or delete the public ssh-key that will be made an authorized_user on the target host.
-  - you can disable this by commenting-out or deleting the line.
-- Review and adjust options for `reboot_after_fixes`, `set_pwless_sudo` and `ssh_disable_pw_logon` to your liking.
-  - By default, all options except `reboot_after_fixes` are set to False.
-- The package lists below may be commented out if no action is wanted
-- Lists of system packages:
-  - `install_packages` - specifies packages to install via the package manager.
+- `ssh_pub_key_path` specifies the public ssh-key that can be added as an authorized_user on the target host, review, edit, change or delete as necessary
+  - you can disable this by commenting-out or deleting the line
+- Review and adjust options for `reboot_after_fixes`, `set_pwless_sudo` and `ssh_disable_pw_logon` to your liking
+  - By default, all options except `reboot_after_fixes` are set to False
+- Any of the package lists below may be commented out as necessary
+- System package lists:
+  - `install_packages` - specifies packages to install via the package manager
   - `remove_packages` - specifies packages to remove
-- Lists of Python packages to install or update.
+- Python package lists
   - `python_upgrade_user` - libraries to upgrade to the latest version in the user directory
   - `python_install_user` - libraries to install in the user context directory
   - `python_install_sys` - libraries to install for the entire system
   - `python_upgrade_sys` - libraries to upgrade to the latest version for the entire system
-- Comment out any list definition and the corresponding function will not execute.
 
 **Select and run a playbook to configure target host(s)**
 - Run the primary playbook (you will be prompted for the password):
   - `./main.yml`
 - Run an alternate playbook if you have certificate-authentication and password-less sudo configured (this runs without a password prompt):
   - `./main-sudo.yml`
-- Run a playbook that applies only the mac related hardware fixes (you will be prompted for a password):
+- Run a playbook that applies only the notebook and mac related hardware fixes (you will be prompted for a password):
   - `./mac-fixes-only.yml`
 
 ### Acknowledgments
