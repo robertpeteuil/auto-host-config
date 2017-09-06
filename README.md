@@ -49,7 +49,7 @@ Install Ansible via pip, package manager, or git
 
 **Clone this repo to your main computer**
 
-Create a directory, download the repo into it and `cd` to it with the following commmands:
+Create a directory, download the repo into it and `cd` to it with the following commands:
 
 ```
 mkdir host-setup
@@ -57,7 +57,7 @@ git clone https://github.com/robertpeteuil/ansible-linux-config host-setup
 cd host-setup
 ```
 
-Note: you can replace `host-setup` with a different name, just be sure to change it on all three commands.
+Note: you can replace `host-setup` with a different folder-name, just be sure its the same on all three commands.
 
 
 **Rename example Inventory & Config files**
@@ -74,13 +74,20 @@ open the `inventory` file with your editor
 
 **Adjust settings in "config.yml"**
 open the `config.yml` file with your editor.
-- review, edit or change the public ssh-key that will be made an authorized_user on the target host.
+- review, edit, change or delete the public ssh-key that will be made an authorized_user on the target host.
   - you can disable this by commenting-out or deleting the line.
-- Change the options for rebooting, enabling password-less sudo and disabling ssh-logon-via-password to your liking.
-  - By default, all options except reboot are set to False.
-- Edit the list of packages to  install and remove via the package manager.
-- Edit the list of Python packages to install or update.
-- You can comment out and list and it will not execute.
+- Review and adjust options for `reboot_after_fixes`, `set_pwless_sudo` and `ssh_disable_pw_logon` to your liking.
+  - By default, all options except `reboot_after_fixes` are set to False.
+- The package lists below may be commented out if no action is wanted
+- Lists of system packages:
+  - `install_packages` - specifies packages to install via the package manager.
+  - `remove_packages` - specifies packages to remove
+- Lists of Python packages to install or update.
+  - `python_upgrade_user` - libraries to upgrade to the latest version in the user directory
+  - `python_install_user` - libraries to install in the user context directory
+  - `python_install_sys` - libraries to install for the entire system
+  - `python_upgrade_sys` - libraries to upgrade to the latest version for the entire system
+- Comment out any list definition and the corresponding function will not execute.
 
 **Select and run a playbook to configure target host(s)**
 - Run the primary playbook (you will be prompted for the password):
@@ -92,4 +99,4 @@ open the `config.yml` file with your editor.
 
 ### Acknowledgments
 
-This playboook includes the [mounopts module](https://github.com/Uberspace/ansible-mountopts) written by Uberspace in the library directory.  It's used when the target computer is a notebook and the primary drive is an SSD.
+This playbook includes the [mounopts module](https://github.com/Uberspace/ansible-mountopts) by Uberspace in the library directory.  It's used when the target computer is a notebook and the primary drive is an SSD.
