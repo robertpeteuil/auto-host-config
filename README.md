@@ -5,12 +5,12 @@
 
 ---
 
-This automation process was created for configuring linux hosts, wether they're notebooks, servers or cloud hosts.  It currently runs on Debian/Ubuntu based hosts, but it can be adapted for use on Redhat/CEntOS by changing only a few files.
+This automation process was created for configuring linux hosts, whether they're notebooks, servers or cloud hosts.  It currently runs on Debian/Ubuntu based hosts, but it can be adapted for use on Redhat/CEntOS by changing only a few files.
 
 It's implemented using Ansible, a free open-source provisioning and management tool.  Ansible is very simple to install and remove.  In fact you can even install it, run this playbook and then uninstall it.
 
 ### Requirements
-Since Ansible is an agent-less utility, the requirements are minimal:
+Since Ansible is an agentless utility, the requirements are minimal:
 - A computer to serve as the "control computer" that has Ansible installed.
 - Target host(s) with an SSH Server installed and running.
 - An account on each target-host with SSH access and sudo capabilities.
@@ -57,7 +57,7 @@ git clone https://github.com/robertpeteuil/ansible-linux-config host-setup
 cd host-setup
 ```
 
-Note: you can replace `host-setup` with a different folder-name, just be sure its the same on all three commands.
+Note: you can replace `host-setup` with a different folder-name, just be sure it's the same on all three commands.
 
 
 **Rename example Inventory & Config files**
@@ -91,7 +91,7 @@ open the `config.yml` file with your editor.
 **Select and run a playbook to configure target host(s)**
 - Run the primary playbook (you will be prompted for the password):
   - `./main.yml`
-- Run an alternate playbook if you have certificate-authentication and password-less sudo configured (this runs without a password prompt):
+- Run an alternate playbook if you have certificate-authentication and passwordless sudo configured (this runs without a password prompt):
   - `./main-sudo.yml`
 - Run a playbook that applies only the notebook and mac related hardware fixes (you will be prompted for a password):
   - `./mac-fixes-only.yml`
