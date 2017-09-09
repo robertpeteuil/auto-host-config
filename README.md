@@ -1,4 +1,4 @@
-# Automating Linux Host Configuration
+# Automated Linux Host Config
 ### Rapidly apply hardware settings, configuration details, and install/remove packages
 [![lang](https://img.shields.io/badge/language-ansible-3572A5.svg?style=flat-square)](https://github.com/robertpeteuil/ansible-linux-config)
 [![status](https://img.shields.io/badge/status-stable-brightgreen.svg?style=flat-square)](https://github.com/robertpeteuil/ansible-linux-config)
