@@ -1,18 +1,18 @@
-# Automated Linux Host Config
-### Rapidly apply hardware settings, configuration details, and install/remove packages
-[![lang](https://img.shields.io/badge/language-ansible-3572A5.svg?style=flat-square)](https://github.com/robertpeteuil/ansible-linux-config)
-[![status](https://img.shields.io/badge/status-stable-brightgreen.svg?style=flat-square)](https://github.com/robertpeteuil/ansible-linux-config)
+# Auto Host Config
+### Rapid applicaton of settings, configuration, package updates and installation on Linux hosts
+[![lang](https://img.shields.io/badge/language-ansible-3572A5.svg?style=flat-square)](https://github.com/robertpeteuil/auto-host-config)
+[![status](https://img.shields.io/badge/status-stable-brightgreen.svg?style=flat-square)](https://github.com/robertpeteuil/auto-host-config)
 
 ---
 
-This automation process was created for configuring linux hosts, whether they're notebooks, servers or cloud hosts.  It currently runs on Debian/Ubuntu based hosts, but it can be adapted for use on Redhat/CEntOS by changing only a few files.
+An automated process that enables rapid configuring of Linux hosts.  It can be used for post-installation configuration or host re-configuration across all types of devices, including: notebooks, servers, cloud hosts, or embedded devices.  This initial release is focused on Ubuntu based hosts, but future support for Redhat/cEntOS and Windows is planned.
 
-It's implemented using Ansible, a free open-source provisioning and management tool.  Ansible is very simple to install and remove.  In fact you can even install it, run this playbook and then uninstall it.
+It's implemented using Ansible, a free open-source provisioning and management tool.  Ansible is very quickly to installed and remove.  It can be installed just to run this playbook, then removed after completion  
 
 ### Requirements
-Since Ansible is an agentless utility, the requirements are minimal:
-- A computer to serve as the "control computer" that has Ansible installed.
-- Target host(s) with an SSH Server installed and running.
+Ansible is an agentless utility, so the requirements are minimal:
+- A computer to serve as the "control computer" where Ansible is installed.
+- Target host(s) running SSH server.
 - An account on each target-host with SSH access and sudo capabilities.
 
 ### Playbooks, Roles and Settings
@@ -52,12 +52,12 @@ Install Ansible via pip, package manager, or git
 Create a directory, download the repo into it and `cd` to it with the following commands:
 
 ```
-mkdir host-setup
-git clone https://github.com/robertpeteuil/ansible-linux-config host-setup
-cd host-setup
+mkdir host-config
+git clone https://github.com/robertpeteuil/auto-host-config host-config
+cd host-config
 ```
 
-Note: you can replace `host-setup` with a different folder-name, just be sure it's the same on all three commands.
+Note: you can replace `host-config` with a different folder-name, just make sure to use the same name in all three commands.
 
 
 **Rename example Inventory & Config files**
