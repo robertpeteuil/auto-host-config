@@ -5,15 +5,18 @@
 
 ---
 
-An automated process that enables rapid configuring of Linux hosts.  It can be used for post-installation configuration or host re-configuration across all types of devices, including: notebooks, servers, cloud hosts, or embedded devices.  This initial release is focused on Ubuntu based hosts, but future support for Redhat/cEntOS and Windows is planned.
+This is an automated process to rapidly configure Linux hosts.  It supports across a variety of device types, including: notebooks, desktops, servers, cloud hosts, and embedded devices.  The initial release supports the configuration of Ubuntu-based hosts. (Redhat/Centos and Windows support planned.)
 
-It's implemented using Ansible, a free open-source provisioning and management tool.  Ansible is very quickly to installed and remove.  It can be installed just to run this playbook, then removed after completion  
+This process is implemented using a free open-source utility called Ansible.  However, it requires no previous knowledge of it.  Additionally, Ansible itself is very simple to install and remove.  
 
 ### Requirements
-Ansible is an agentless utility, so the requirements are minimal:
-- A computer to serve as the "control computer" where Ansible is installed.
-- Target host(s) running SSH server.
-- An account on each target-host with SSH access and sudo capabilities.
+The requirements are minimal:
+- The host you want to configure (called the "target" host below)
+  - The target must have an SSH server running (instructions below)
+  - The target must have an account that allows SSH access and has sudo capabilities
+- A second computer is required to serve as the "control computer"
+  - This is where you Ansible and this repo will be installed
+
 
 ### Playbooks, Roles and Settings
 
@@ -33,12 +36,12 @@ Ansible is an agentless utility, so the requirements are minimal:
 - Settings also exist in the default folder for each role
   - Advanced Ansible users can remove the `vars_files` section from the playbooks and use the settings files within each role.
 
-### Setup Steps
+### Setup
 
-**Setup SSH on target host(s) (if required)**
-- Most cloud instances/VMs have SSH installed & running by default.
+**Ensure SSH is installed on target (if required)**
 - If you're installing Linux on a local machine or notebook, you may need to install it.
-  - It can be installed with by typing the following command into the terminal on the target host: `sudo apt-get install openssh-server`
+  - Typing the following command into the terminal on the target will install it: `sudo apt-get install openssh-server`
+- On cloud instances/VMs, SSH is installed & running by default.
 
 **Install Ansible on the main computer**
 
