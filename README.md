@@ -5,17 +5,17 @@
 
 ---
 
-This is an automated process to rapidly configure Linux hosts.  It supports across a variety of device types, including: notebooks, desktops, servers, cloud hosts, and embedded devices.  The initial release supports the configuration of Ubuntu-based hosts. (Redhat/Centos and Windows support planned.)
+This is an automated process to rapidly configure Linux hosts.  It supports across a variety of device types, including: notebooks, desktops, servers, cloud hosts, and embedded devices.  The initial release supports the configuration of Ubuntu-based hosts, with Redhat/Centos and Windows support planned.
 
-This process is implemented using a free open-source utility called Ansible.  However, it requires no previous knowledge of it.  Additionally, Ansible itself is very simple to install and remove.  
+This is implemented using a free, open-source utility called Ansible which runs on Windows, Mac and Linux.  Use of this process does not require previous knowledge of Ansible. 
 
 ### Requirements
 The requirements are minimal:
-- The host you want to configure (called the "target" host below)
-  - The target must have an SSH server running (instructions below)
-  - The target must have an account that allows SSH access and has sudo capabilities
-- A second computer is required to serve as the "control computer"
-  - This is where you Ansible and this repo will be installed
+- The host you want to configure (referred to as "target host" below)
+  - Must have an SSH server installed and running (instructions below)
+  - Must have an account that allows SSH access and sudo capabilities
+- A second computer which will be used as a "control computer"
+  - This is where Ansible and the repo files will be installed
 
 
 ### Playbooks, Roles and Settings
