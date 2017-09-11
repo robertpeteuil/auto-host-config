@@ -43,25 +43,6 @@ cd host-config
 
 Note: you can replace `host-config` with a different folder-name, just make sure to use the same name in all three commands.
 
-
-### Playbooks, Roles and Settings
-
-**Playbooks**
-- `main.yml` - the primary method of execution.  It prompts for the target host password and executes all three roles (described below).
-- `main-sudo.yml` - this is only for users who have configured the host for Ansible use (by running main.yml with ssh_pub_key_path pointing to their SSH certificate, and set_pwless_sudo set to True).
-- `mac-fixes-only.yml` - for users who only want to apply the hardware adjustments for Linux on a notebook or Mac.
-
-**Roles**
-- `hardware`: current HW adjustments are for linux installs on notebooks and macs
-- `install-base`: installs/removes apt packages and installs/updates python modules
-- `config-sys`: configure SSH security, enable no-spoof, install fail2ban and (optionally) set user account for Ansible use
-
-**Settings**
-- The host inventory file is the file named `inventory`
-- Configuration settings are consolidated in the file `config.yml`
-- Settings also exist in the default folder for each role
-  - Advanced Ansible users can remove the `vars_files` section from the playbooks and use the settings files within each role.
-
 **Rename example Inventory & Config files**
 Create copies of the inventory and configuration files without the ".example" suffix
 - The included script does this for you: `./rename-examples.sh`
@@ -97,6 +78,26 @@ open the `config.yml` file with your editor.
   - `./main-sudo.yml`
 - Run a playbook that applies only the notebook and mac related hardware fixes (you will be prompted for a password):
   - `./mac-fixes-only.yml`
+
+
+### Playbooks, Roles and Settings
+
+**Playbooks**
+- `main.yml` - the primary method of execution.  It prompts for the target host password and executes all three roles (described below).
+- `main-sudo.yml` - this is only for users who have configured the host for Ansible use (by running main.yml with ssh_pub_key_path pointing to their SSH certificate, and set_pwless_sudo set to True).
+- `mac-fixes-only.yml` - for users who only want to apply the hardware adjustments for Linux on a notebook or Mac.
+
+**Roles**
+- `hardware`: current HW adjustments are for linux installs on notebooks and macs
+- `install-base`: installs/removes apt packages and installs/updates python modules
+- `config-sys`: configure SSH security, enable no-spoof, install fail2ban and (optionally) set user account for Ansible use
+
+**Settings**
+- The host inventory file is the file named `inventory`
+- Configuration settings are consolidated in the file `config.yml`
+- Settings also exist in the default folder for each role
+  - Advanced Ansible users can remove the `vars_files` section from the playbooks and use the settings files within each role.
+
 
 ### Acknowledgments
 
