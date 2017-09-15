@@ -1,6 +1,5 @@
 ---
-# path to public ssh key to import into account (optional)
-#ssh_pub_key_path: "~/.ssh/id_rsa.pub"
+# localhost config.yml file 
 
 # Reboot after fixes (must use False on local)
 reboot_after_fixes: False
