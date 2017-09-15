@@ -2,8 +2,8 @@
 # path to public ssh key to import into account (optional)
 #ssh_pub_key_path: "~/.ssh/id_rsa.pub"
 
-# Reboot if required after hardware fixes (recommended)
-reboot_after_fixes: True
+# Reboot after fixes (must use False on local)
+reboot_after_fixes: False
 
 # Enable passwordless sudo for the specified user
 #   only set if you intend to use ansible with this host in the future
