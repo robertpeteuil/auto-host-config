@@ -1,3 +1,3 @@
 ---
 # Reboot after hardware fixes if required (recommended)
-reboot_after_fixes: True
+reboot_after_fixes: False
