@@ -1,15 +1,3 @@
-# the [hewhost] section header is required
 [newhost]
 
-hostname
-
-# use this format if target host has a different username
-# hostname      ansible_user=username
-
-# INVENTORY PARAMETERS
-#
-#   hostname              - replace with IP address or hostname of target host
-#
-#   ansible_user=username - specify when remote username is different than
-#                           current user on control host
-#                           change 'username' to the username on the target host
+localhost   ansible_connection=local
