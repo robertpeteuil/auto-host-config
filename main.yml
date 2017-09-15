@@ -13,8 +13,8 @@
   hosts: newhost
 
   vars_prompt:
-  - name: "ansible_password"
-    prompt: "Enter password for User on New Host"
+  - name: "ansible_sudo_pass"
+    prompt: "Enter sudo password"
     private: yes
 
   vars_files:
@@ -24,10 +24,6 @@
     - set_fact:
         ansible_user: "{{ ansible_user_id }}"
       when: ansible_user is undefined
-      tags: always
-
-    - set_fact:
-        ansible_sudo_pass: "{{ ansible_password }}"
       tags: always
 
   roles:
