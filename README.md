@@ -1,21 +1,26 @@
-# Auto Host Config
-### Rapid applicaton of settings, configuration, package updates and installation on Linux hosts
+# Auto Host Config - Remote Host Version
+### Rapid application of settings, configuration, updates and app installations on remote Linux hosts
 [![lang](https://img.shields.io/badge/language-ansible-3572A5.svg?style=flat-square)](https://github.com/robertpeteuil/auto-host-config)
 [![status](https://img.shields.io/badge/status-stable-brightgreen.svg?style=flat-square)](https://github.com/robertpeteuil/auto-host-config)
 
 ---
 
-This is an automated process to rapidly configure Linux hosts.  It supports across a variety of device types, including: notebooks, desktops, servers, cloud hosts, and embedded devices.  The initial release supports the configuration of Ubuntu-based hosts, with Redhat/Centos and Windows support planned.
+This is an automated process to rapidly configure Linux hosts - this is the Remote Host Version.  There are two versions, each with their own git branch.  Make sure  you download the correct one:
+- Remote: for configuring a host from a separate control computer.  ex: configure a notebook from your desktop.
+- Local: for configuring a host directly.  ex: configure a notebook directly from that notebook.
 
-This is implemented using a free, open-source utility called Ansible which runs on Windows, Mac and Linux.  Use of this process does not require previous knowledge of Ansible. 
+This process supports across a variety of device types, including: notebooks, desktops, servers, cloud hosts, and embedded devices.  The initial release supports the configuration of Ubuntu-based hosts, with Redhat/Centos and Windows support planned.
+
+This is implemented using a free, open-source utility called Ansible which runs on Windows, Mac and Linux.  Use of this process does not require previous knowledge of Ansible.
 
 ### Requirements
 The requirements are minimal:
-- The host you want to configure (referred to as "target host" below)
-  - Must have an SSH server installed and running (instructions below)
-  - Must have an account that allows SSH access and sudo capabilities
-- A second computer which will be used as a "control computer"
-  - This is where Ansible and the repo files will be installed
+- The "remote-host" to be configured (referred to as "target host" below)
+  - SSH server installed and running (instructions below)
+  - A user account that allows SSH access and sudo capabilities
+- A second computer to use as the "control computer"
+  - If you want to configure it directly, switch to the "local" branch of this repo.
+  - Ansible and the repo files are installed on the "control computer"
 
 ### Setup
 
