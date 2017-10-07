@@ -33,6 +33,6 @@
       tags: always
 
   roles:
-    - hardware
-    - install-base
-    - config-sys
+    - config-linux-hw
+    - config-linux-base
+    - config-linux-sys

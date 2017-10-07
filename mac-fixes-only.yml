@@ -31,4 +31,4 @@
       tags: always
 
   roles:
-    - hardware
+    - config-linux-hw
