@@ -21,6 +21,7 @@ The requirements are minimal:
 - A second computer to use as the "control computer"
   - If you want to configure it directly, switch to the "local" branch of this repo.
   - Ansible and the repo files are installed on the "control computer"
+    - Ansible version 2.4.0.0 or later is required.
 
 ### Setup
 
@@ -93,15 +94,15 @@ open the `config.yml` file with your editor.
 - `mac-fixes-only.yml` - for users who only want to apply the hardware adjustments for Linux on a notebook or Mac.
 
 **Roles**
-- `hardware`: current HW adjustments are for linux installs on notebooks and macs
-- `install-base`: installs/removes apt packages and installs/updates python modules
-- `config-sys`: configure SSH security, enable no-spoof, install fail2ban and (optionally) set user account for Ansible use
+- `config-linux-hw`: current HW adjustments are for linux installs on notebooks and macs
+- `config-linux-base`: installs/removes apt packages and installs/updates python modules
+- `config-linux-sys`: configure SSH security, enable no-spoof, install fail2ban and (optionally) set user account for Ansible use
 
 **Settings**
 - The host inventory file is the file named `inventory`
 - Configuration settings are consolidated in the file `config.yml`
 - Settings also exist in the default folder for each role
-  - Advanced Ansible users can remove the `vars_files` section from the playbooks and use the settings files within each role.
+  - Advanced Ansible users can use settings files within each role by removing the `vars_files` section from each playbooks
 
 
 ### Acknowledgments
