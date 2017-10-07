@@ -1,19 +1,19 @@
 ---
 - name: SSH config
-  include: ssh.yml
+  import_tasks: ssh.yml
   tags:
     - config-sys
     - ssh
 
 - name: Enhance host security
   include: secure.yml
-  become: True
+  import_tasks: True
   tags:
     - config-sys
     - secure
 
 - name: Enable passwordless sudo for future Ansible Use
-  include: ansible.yml
+  include_tasks: ansible.yml
   when: set_pwless_sudo|bool
   become: True
   tags:
