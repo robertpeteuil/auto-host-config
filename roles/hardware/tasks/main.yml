@@ -1,5 +1,4 @@
 ---
-# this use of 'find' reqs Ansible 2.3+ in order to specify file_type=link (or 'any') 
 - name: Notebook Check
   find:
     paths: /sys/class/power_supply
@@ -26,7 +25,7 @@
   tags: notebook
 
 - name: rc.local required
-  include: rclocal.yml
+  include_tasks: rclocal.yml
   when: ismac or isnotebook
   become: True
   tags:
@@ -35,7 +34,7 @@
     - power
 
 - name: mac found - fix keyboard map
-  include: mac-kybd.yml
+  include_tasks: mac-kybd.yml
   when: ismac
   become: True
   tags:
@@ -44,7 +43,7 @@
     - mac
 
 - name: notebook - adjust power settings
-  include: power.yml
+  include_tasks: power.yml
   when: isnotebook
   become: True
   tags:
@@ -52,7 +51,7 @@
     - power
 
 - name: notebook ssd - config reduced wear
-  include: ssd.yml
+  include_tasks: ssd.yml
   when: isssd and isnotebook
   become: True
   tags:
