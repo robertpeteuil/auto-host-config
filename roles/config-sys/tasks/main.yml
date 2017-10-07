@@ -6,8 +6,8 @@
     - ssh
 
 - name: Enhance host security
-  include: secure.yml
-  import_tasks: True
+  import_tasks: secure.yml
+  become: True
   tags:
     - config-sys
     - secure
