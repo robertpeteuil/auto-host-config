@@ -1,13 +1,13 @@
 ---
 - name: Install and remove apt packages
-  include: apt.yml
+  import_tasks: apt.yml
   become: true
   tags:
     - install-base
     - apt
 
 - name: Install and remove python packages
-  include: python.yml
+  import_tasks: python.yml
   become: false
   tags:
     - install-base
